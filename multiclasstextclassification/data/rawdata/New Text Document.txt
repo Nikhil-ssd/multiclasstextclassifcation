@@ -1,0 +1,26 @@
+# Make predictions
+ugtpredrf = rf_classifier.predict(ugt_npyarray)
+
+ugt_resarr
+
+accuracy_score(ugt_resarr, ugtpredrf)  # y_test should be the labels from the train-test split
+
+# Compute the confusion matrix
+cm = confusion_matrix(ugt_resarr, ugtpredrf, labels=rf_classifier.classes_)
+
+# Create the ConfusionMatrixDisplay instance
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=rf_classifier.classes_)
+
+# Plot the confusion matrix
+# Set figure size
+plt.figure(figsize=(15, 12))  # Adjust width and height as needed
+
+# Plot the confusion matrix
+ax = disp.plot(values_format='d', ax=plt.gca())
+plt.xticks(rotation = 45)
+
+# Save the figure automatically
+plt.savefig(os.path.join(visuals_folder, "UGT_RF_Confusion_Matrix.png"))
+plt.show()
+
+print("Classification Report:\n", classification_report(ugt_resarr, ugtpredrf))
